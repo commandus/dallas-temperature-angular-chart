@@ -1,6 +1,9 @@
 <p>
 </p>
 @for(si of sensors; track si.i) {
-    si.i si.m
-    <app-sensor-plot [sensor]="si.m"></app-sensor-plot>
+    <app-sensor-plot [sensor]="si.m" (closed)="plotClosed($event)"></app-sensor-plot>
 }
+<p class="pnl">
+    <button mat-raised-button matTooltip="Отправить тестовые данные" (click)="sendTest()"><mat-icon>cruelty_free</mat-icon>Тест</button>
+</p>
+

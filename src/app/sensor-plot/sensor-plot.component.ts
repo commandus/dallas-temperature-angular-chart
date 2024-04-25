@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 import {
   ChartComponent,
@@ -20,13 +22,14 @@ export type ChartOptions = {
 @Component({
   selector: 'app-sensor-plot',
   standalone: true,
-  imports: [NgApexchartsModule, MatButtonModule],
+  imports: [NgApexchartsModule, MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './sensor-plot.component.html',
   styleUrl: './sensor-plot.component.scss'
 })
 export class SensorPlotComponent implements OnInit {
   @ViewChild(ChartComponent) chart!: ChartComponent;
   @Input() sensor = 0n;
+  @Output() closed = new EventEmitter<bigint>();
 
   public chartOptions: ChartOptions = {
     series: [{
@@ -54,8 +57,7 @@ export class SensorPlotComponent implements OnInit {
       series: [
         {
           name: "Температура датчика " + (this.sensor ? this.sensor : " без номера"),
-          data: [
-          ]
+          data: []
         }
       ],
       chart: {
@@ -71,25 +73,12 @@ export class SensorPlotComponent implements OnInit {
     };
   }
 
-  apd() : void {
-    console.log(this.chart);
-    this.chart.appendSeries(
-      [{
-        name: "Температура датчика " + (this.sensor ? this.sensor : " без номера"),
-        data: []
-      }
-      ]
-    , true);
+  rm() : void {
+    this.closed.emit(this.sensor);
   }
 
   public append(t: number) : void {
-    console.log(this.chart);
-    this.chart.appendSeries([
-      {
-        name: '1',
-        data: [{ x: new Date().getTime(), y: t}]
-      }
-    ], true);
+    this.chart.appendData([{ data: [{ x: new Date().getTime(), y: t}]}]);
   }
  
 }

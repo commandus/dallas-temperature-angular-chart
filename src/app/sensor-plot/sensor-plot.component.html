@@ -1,4 +1,3 @@
-<p>Датчик </p>
 <div style="text-align:center">
     <apx-chart
       [series]="chartOptions.series"
@@ -7,6 +6,6 @@
       [title]="chartOptions.title"
     ></apx-chart>
 </div>
-<p>
-    <button mat-button type="button" (click)="apd()">Click</button>
+<p class="pnl">
+    <button mat-raised-button matTooltip="Закрыть график" (click)="rm()"><mat-icon>remove</mat-icon>Закрыть график</button>
 </p>
