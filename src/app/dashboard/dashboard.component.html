@@ -1,4 +1,6 @@
 <p>
 </p>
-
-<app-sensor-plot></app-sensor-plot>
+@for(si of sensors; track si.i) {
+    si.i si.m
+    <app-sensor-plot [sensor]="si.m"></app-sensor-plot>
+}

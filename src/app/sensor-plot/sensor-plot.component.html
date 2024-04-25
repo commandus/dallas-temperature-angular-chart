@@ -1,1 +1,12 @@
-<p>sensor-plot works!</p>
+<p>Датчик </p>
+<div style="text-align:center">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+</div>
+<p>
+    <button mat-button type="button" (click)="apd()">Click</button>
+</p>
