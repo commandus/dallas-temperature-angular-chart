@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 // https://apexcharts.com/angular-chart-demos/line-charts/basic/
 // https://apexcharts.com/docs/angular-charts/
 
-// const SSE = "http://localhost:1234";
+//const SSE = "http://localhost:1234";
 const SSE = "/sse";
 
 class SensorMacNTemperature {
@@ -36,11 +36,12 @@ export class DashboardComponent {
 
   public put(mt: SensorMacNTemperature): boolean {
     let r = false;
-    this.sensors.forEach(s => {
-      if (s.m == mt.m) {
+    for (let i = 0; i < this.sensors.length; i++) {
+      if (this.sensors[i].m == mt.m) {
         r = true;
+        break;
       }
-    });
+    }
     if (!r) {
       const si = new SensorItem;
       si.i = this.sensors.length;
@@ -48,8 +49,10 @@ export class DashboardComponent {
       this.sensors.push(si);
       this.changeDetectorRef.detectChanges();
     }
+
     this.plots.forEach(v => {
-      v.append(mt.t);
+      if (v.sensor == mt.m)
+        v.append(mt.t);
     });
     return r;
   }
@@ -61,20 +64,23 @@ export class DashboardComponent {
     const that = this;
     this.ev.onmessage = function(e) {
       const mt = new SensorMacNTemperature;
+      let valid = 0;
       const v = e.data.split(',');
-
       for (var i = 0; i < v.length; i++) {
         const pair = v[i].split('=');
         if (pair.length == 2) {
           if(pair[0] == 'm') {
             mt.m = BigInt(pair[1]);
+            valid |= 1;
           }
           if(pair[0] == 't') {
             mt.t = Number.parseFloat(pair[1]);
+            valid |= 2;
           }
         }
       }
-      that.put(mt);
+      if (valid == 3)
+        that.put(mt);
     }
     
   }
