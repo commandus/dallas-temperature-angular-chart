@@ -9,7 +9,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 // https://apexcharts.com/angular-chart-demos/line-charts/basic/
 // https://apexcharts.com/docs/angular-charts/
 
-const SSE = "http://localhost:1234";
+// const SSE = "http://localhost:1234";
+const SSE = "/sse";
 
 class SensorMacNTemperature {
   m = 0n;
@@ -80,7 +81,7 @@ export class DashboardComponent {
 
   sendTest() : void {
     const t = (20.0 + Math.random() * 10).toFixed(1);
-    this.http.get<any>(SSE + '/send?m=1&t=' + t).subscribe(v => {
+    this.http.get(SSE + '/send?m=1&t=' + t, {responseType: 'text'}).subscribe(v => {
       console.log(v);
   }) 
   }
