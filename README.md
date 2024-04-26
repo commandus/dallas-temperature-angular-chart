@@ -34,3 +34,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 npm install apexcharts ng-apexcharts --save 
 ng add @angular/material
 ```
+
+## Deploy
+
+```
+cd ~/src/dallas-temperature-angular-chart/dist/dallas-temperature/browser;scp * andrei@lora.commandus.com:/var/www/html/t
+```
