@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { EnvService } from '../svc/env';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,18 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'dallas-temperature';
+  @HostBinding('class')
+  
+  title = 'Dallas temperature sensor test';
+
+  public get themeMode() {
+    return this.env.settings.darkMode ? 'dark' : 'light';
+  }
+
+  constructor(
+    private env: EnvService
+  ) {
+    // @see https://thecodeshewrites.com/2021/06/16/angular-material-dark-light-theme/#htoc-theme-management-with-angular-material
+    this.env.darkThemeOn(this.env.settings.darkMode);
+  }
 }

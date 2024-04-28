@@ -4,12 +4,14 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TopMenuComponent } from '../top-menu/top-menu.component';
 
 // https://apexcharts.com/angular-chart-demos/line-charts/basic/
 // https://apexcharts.com/docs/angular-charts/
 
-//const SSE = "http://localhost:1234";
+// const SSE = "http://localhost:1234";
 const SSE = "/sse";
 
 class SensorMacNTemperature {
@@ -25,7 +27,8 @@ class SensorItem {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [SensorPlotComponent, NgApexchartsModule, MatButtonModule, MatIconModule, MatTooltipModule, HttpClientModule ],
+  imports: [SensorPlotComponent, NgApexchartsModule, MatButtonModule, MatIconModule, MatTooltipModule, HttpClientModule, TopMenuComponent,
+    MatSidenavModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

@@ -1,0 +1,12 @@
+<div class="top-row">
+    <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Меню" aria-label="Меню">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="form-header">Dallas temperature sensor test</span>
+    <mat-menu #menu="matMenu">
+        <!--
+        <button mat-menu-item (click)="nav('/')">Первая страница</button>
+        -->
+        <app-dark-mode-switch matTooltip="Светлая или темная тема" [checked]="env.settings.darkMode" (darkThemeOn)="env.darkThemeOn($event)"></app-dark-mode-switch>
+    </mat-menu>
+</div>

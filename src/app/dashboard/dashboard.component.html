@@ -1,9 +1,16 @@
-<p>
-</p>
-@for(si of sensors; track si.i) {
-    <app-sensor-plot [sensor]="si.m" (closed)="plotClosed($event)"></app-sensor-plot>
-}
-<p class="pnl">
-    <button mat-raised-button matTooltip="Отправить тестовые данные" (click)="sendTest()"><mat-icon>cruelty_free</mat-icon>Тест</button>
-</p>
+<mat-drawer-container class="full-page">
+    <mat-drawer #drawer mode="side" opened="false"></mat-drawer>
+    <mat-drawer-content class="nav-menu-sidenav-content">
+        <app-top-menu></app-top-menu>
+        <div>
+            @for(si of sensors; track si.i) {
+                <app-sensor-plot [sensor]="si.m" (closed)="plotClosed($event)"></app-sensor-plot>
+            }
+            <p class="pnl">
+                <button mat-raised-button matTooltip="Отправить тестовые данные" (click)="sendTest()"><mat-icon>cruelty_free</mat-icon>Тест</button>
+            </p>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
 
